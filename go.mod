@@ -1,4 +1,4 @@
-module github.com/namrahov/web-app
+module github.com/namrahov/gross-to-net
 
 go 1.16
 
