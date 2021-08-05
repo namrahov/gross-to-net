@@ -6,6 +6,7 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/joho/godotenv"
 	"github.com/namrahov/gross-to-net/config"
+	"github.com/namrahov/gross-to-net/handler"
 	mw "github.com/namrahov/gross-to-net/middleware"
 	log "github.com/sirupsen/logrus"
 	"net/http"
