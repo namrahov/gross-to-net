@@ -21,14 +21,14 @@ var salaryService = salary.Service{}
 func ConvertGrossToNet(router *chi.Mux) *chi.Mux {
 	h := &salaryHandler{salaryService: &salaryService}
 
-	router.Get(config.ReportHandlerPath+"/employee/{id}", h.ConvertGrossToNet)
+	router.Get(config.ReportHandlerPath+"/gross-to-net", h.ConvertGrossToNet)
 
 	return router
 }
 
 func (h *salaryHandler) ConvertGrossToNet(w http.ResponseWriter, r *http.Request) {
 
-	dto, err := getRatingFromRequest(r)
+	dto, err := getDtoFromRequest(r)
 	if err != nil {
 		return
 	}
@@ -41,18 +41,18 @@ func (h *salaryHandler) ConvertGrossToNet(w http.ResponseWriter, r *http.Request
 	json.NewEncoder(w).Encode(result)
 }
 
-func getRatingFromRequest(r *http.Request) (*model.SalaryDto, error) {
+func getDtoFromRequest(r *http.Request) (*model.SalaryDto, error) {
 	b, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		log.Error("failed to parse the model", b)
-		return nil, errhandler.NewBadRequestError(err.Error(), nil)
+		return nil, errhandler.NewBadRequestError(err.Error())
 	}
 
 	dto := new(model.SalaryDto)
 	err = json.Unmarshal(b, dto)
 	if err != nil {
 		log.Error("failed to parse the model", b)
-		return nil, errhandler.NewBadRequestError(err.Error(), nil)
+		return nil, errhandler.NewBadRequestError(err.Error())
 	}
 
 	return dto, nil
