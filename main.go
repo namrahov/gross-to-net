@@ -1,11 +1,14 @@
-package gross_to_net
+package main
 
 import (
 	"flag"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/joho/godotenv"
+	"github.com/namrahov/gross-to-net/config"
+
 	log "github.com/sirupsen/logrus"
+	"net/http"
 )
 
 var (
@@ -25,8 +28,14 @@ func main() {
 
 	initEnvVars()
 
+	config.LoadConfig()
+
 	router := chi.NewRouter()
 	router.Use(middleware.Recoverer)
+	//router.Use(middleware.Default)
+
+	log.Info("Starting server at port ", *port)
+	log.Fatal(http.ListenAndServe(*port, router))
 
 }
 
