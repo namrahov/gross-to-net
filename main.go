@@ -6,7 +6,7 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/joho/godotenv"
 	"github.com/namrahov/gross-to-net/config"
-
+	mw "github.com/namrahov/gross-to-net/middleware"
 	log "github.com/sirupsen/logrus"
 	"net/http"
 )
@@ -32,7 +32,9 @@ func main() {
 
 	router := chi.NewRouter()
 	router.Use(middleware.Recoverer)
-	//router.Use(middleware.Default)
+	router.Use(mw.Default)
+
+	handler.convertGrossToNet(router)
 
 	log.Info("Starting server at port ", *port)
 	log.Fatal(http.ListenAndServe(*port, router))
