@@ -3,7 +3,7 @@ package handler
 import (
 	"github.com/go-chi/chi"
 	"github.com/namrahov/gross-to-net/config"
-	"github.com/namrahov/gross-to-net/service/salary"
+	"github.com/namrahov/gross-to-net/service"
 	"net/http"
 )
 
