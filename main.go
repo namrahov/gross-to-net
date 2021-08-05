@@ -35,7 +35,7 @@ func main() {
 	router.Use(middleware.Recoverer)
 	router.Use(mw.Default)
 
-	handler.convertGrossToNet(router)
+	handler.ConvertGrossToNet(router)
 
 	log.Info("Starting server at port ", *port)
 	log.Fatal(http.ListenAndServe(*port, router))
